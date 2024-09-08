@@ -16,4 +16,12 @@ public class ItemService {
 
         itemRepositiory.save(item);
     }
+
+    public void updateItem(String title, Integer price, Integer id){
+        Item item = new Item();
+        item.setId(id);
+        item.setTitle(title);
+        item.setPrice(price);
+        itemRepositiory.save(item);
+    }
 }

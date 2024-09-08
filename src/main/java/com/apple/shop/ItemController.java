@@ -52,13 +52,7 @@ public class ItemController {
     }
     @PostMapping("/edit")
     String editSave(@RequestParam String title , Integer price , Integer id){
-
-        Item item = new Item();
-        item.setId(id);
-        item.setTitle(title);
-        item.setPrice(price);
-//        Optional<Item> result = itemRepositiory.findById(id);
-        itemRepositiory.save(item);
+        itemService.updateItem(title, price, id);
         return "redirect:/list";
     }
 
@@ -90,6 +84,12 @@ public class ItemController {
         }else{
             return "redirect:/list";
         }
+    }
+
+    @PostMapping("/test1")
+    String test1(@RequestBody Item body){
+        System.out.println(body);
+        return "redirect:/list";
     }
 
     @PostMapping("/delete/{id}")
