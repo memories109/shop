@@ -87,7 +87,7 @@ public class ItemController {
     }
 
     @PostMapping("/test1")
-    String test1(@RequestBody Item body){
+    String test1(@RequestBody Map<String, Object> body){
         System.out.println(body);
         return "redirect:/list";
     }
