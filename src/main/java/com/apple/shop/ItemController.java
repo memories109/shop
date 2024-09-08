@@ -1,12 +1,11 @@
 package com.apple.shop;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -41,15 +40,35 @@ public class ItemController {
         itemRepositiory.save(item);
         return "redirect:/list";
     }
+//    @GetMapping("/detail/{id}")
+//    ResponseEntity<String> detail(@PathVariable Integer id, Model model){
+//        try {
+//            Optional<Item> result = itemRepositiory.findById(id);
+//            if(result.isPresent()){
+//                model.addAttribute("data", result.get());
+//                return "detail.html";
+//            }else{
+//                return "redirect:/list"
+//            }
+//
+//            ResponseEntity.status(200).body("Success");
+//        } catch (Exception e){
+//            System.out.println(e.getMessage());
+////            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("error");
+//        }
+//    }
+
     @GetMapping("/detail/{id}")
     String detail(@PathVariable Integer id, Model model){
-        Optional<Item> result = itemRepositiory.findById(id);
-        if(result.isPresent()){
-            model.addAttribute("data", result.get());
-        }else{
-
-        }
-        return "detail.html";
+            Optional<Item> result = itemRepositiory.findById(id);
+            if(result.isPresent()){
+                model.addAttribute("data", result.get());
+                return "detail.html";
+            }else{
+                return "redirect:/list";
+            }
     }
+
+
 
 }
