@@ -40,6 +40,28 @@ public class ItemController {
         return "redirect:/list";
     }
 
+    @GetMapping("/edit/{id}")
+    String edit(@PathVariable Integer id, Model model){
+        Optional<Item> result = itemRepositiory.findById(id);
+        if(result.isPresent()){
+            model.addAttribute("item",result.get());
+            return "edit.html";
+        }else{
+            return  "redirect:/list";
+        }
+    }
+    @PostMapping("/edit")
+    String editSave(@RequestParam String title , Integer price , Integer id){
+
+        Item item = new Item();
+        item.setId(id);
+        item.setTitle(title);
+        item.setPrice(price);
+//        Optional<Item> result = itemRepositiory.findById(id);
+        itemRepositiory.save(item);
+        return "redirect:/list";
+    }
+
 
 //    @GetMapping("/detail/{id}")
 //    ResponseEntity<String> detail(@PathVariable Integer id, Model model){
@@ -61,13 +83,20 @@ public class ItemController {
 
     @GetMapping("/detail/{id}")
     String detail(@PathVariable Integer id, Model model){
-            Optional<Item> result = itemRepositiory.findById(id);
-            if(result.isPresent()){
-                model.addAttribute("data", result.get());
-                return "detail.html";
-            }else{
-                return "redirect:/list";
-            }
+        Optional<Item> result = itemRepositiory.findById(id);
+        if(result.isPresent()){
+            model.addAttribute("data", result.get());
+            return "detail.html";
+        }else{
+            return "redirect:/list";
+        }
+    }
+
+    @PostMapping("/delete/{id}")
+    String delete(@PathVariable Integer id){
+        Optional<Item> result = itemRepositiory.findById(id);
+        itemRepositiory.delete(result.get());
+        return "redirect:/list";
     }
 
 
