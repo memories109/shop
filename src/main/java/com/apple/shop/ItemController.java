@@ -1,6 +1,7 @@
 package com.apple.shop;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import java.util.*;
 public class ItemController {
 
     private final ItemRepository itemRepositiory;
+    @Autowired
+    ItemService itemService;
 
     @GetMapping("/list")
     String list(Model model){
@@ -32,14 +35,11 @@ public class ItemController {
 
     @PostMapping("/add")
     String addPost(String title, Integer price){
-//        Map<String, Objects> map = new HashMap<>();
-
-        Item item = new Item();
-        item.setTitle(title);
-        item.setPrice(price);
-        itemRepositiory.save(item);
+        itemService.saveItem(title, price);
         return "redirect:/list";
     }
+
+
 //    @GetMapping("/detail/{id}")
 //    ResponseEntity<String> detail(@PathVariable Integer id, Model model){
 //        try {
