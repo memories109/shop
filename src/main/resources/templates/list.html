@@ -19,15 +19,15 @@
         <a  th:href="@{'/detail/' + ${i.id}}">링크</a>
         <p  th:text="${i.price}">8억</p>
         <a  th:href="@{'/edit/' + ${i.id}}">수정</a>
-<!--        <span th:onclick="fetch('/item?id=[[${i.id}]]', {method : 'DELETE'})-->
-<!--        .then(r => r.text())-->
-<!--        .then(() => {-->
-<!--            location.reload();-->
+        <span th:onclick="fetch('/item?id=[[${i.id}]]', {method : 'DELETE'})
+        .then(r => r.text())
+        .then(() => {
+            location.reload();
+        })
+<!--        .then( (a) => {-->
+<!--            console.log(a)-->
 <!--        })-->
-<!--&lt;!&ndash;        .then( (a) => {&ndash;&gt;-->
-<!--&lt;!&ndash;            console.log(a)&ndash;&gt;-->
-<!--&lt;!&ndash;        })&ndash;&gt;-->
-<!--        ">🗑️</span>-->
+        ">🗑️</span>
     </div>
 </div>
 
