@@ -3,6 +3,7 @@ package com.apple.shop;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,6 +98,12 @@ public class ItemController {
         Optional<Item> result = itemRepositiory.findById(id);
         itemRepositiory.delete(result.get());
         return "redirect:/list";
+    }
+
+    @DeleteMapping("/item")
+    ResponseEntity<String> deleteItem(@RequestParam Integer id){
+        itemRepositiory.deleteById(id);
+        return ResponseEntity.status(200).body("삭제완료");
     }
 
 
